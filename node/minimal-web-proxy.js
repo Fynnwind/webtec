@@ -1,6 +1,6 @@
 const http = require('http');
 
-const PORT = 80;
+const PORT = 8080;
 
 const server = http.createServer((clientReq, clientRes) => {
     // Define options for the request to the target server
