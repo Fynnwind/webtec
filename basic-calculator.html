@@ -1,0 +1,47 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <title>Basic Calculator</title>
+  <meta name="Generator" content="Ich">
+  <meta name="Author" content="Till Hoffmann">
+  <meta name="Keywords" content="Calculator">
+  <meta name="Description" content="A basic calculator that supports addition, subtraction, multiplication and division.">
+  <meta charset="utf-8"/>
+  <script type="text/javascript">
+    function opeval() {
+		var a1 = document.getElementById("arg1").value;
+		var a2 = document.getElementById("arg2").value;
+		var op = document.getElementById("op").value;
+//		alert(a1 + op + a2);
+		var result = eval(a1 + op + a2);
+//		alert(result);
+		document.getElementById("res").innerHTML = result;
+	}
+	
+	function isValidKey(evt) {
+		var charCode = (evt.which) ? evt.which : evt.keyCode
+		if ((charCode < 48 || charCode > 57) && (charCode < 45 || charCode > 46))
+			return false;
+		return true;
+	}
+  </script>
+  <style>
+   input {text-align:right;}
+  </style>
+ </head>
+ <body>
+  <form action="javascript:opeval();">
+   <input type="text" id="arg1" value="0" onkeypress="return isValidKey(event)"/>
+	<select id="op" size="1" style="width: 40px;">
+	  <option value="+" selected>+</option>
+	  <option value="-">-</option>
+	  <option value="*">*</option>
+	  <option value="/">/</option>
+	</select></label>
+   <input type="text" id="arg2" value="0" onkeypress="return isValidKey(event)"/>
+   <button type="submit">Calculate</button>
+  </form>
+ Result: <span id="res">None</span>
+  
+ </body>
+</html>
