@@ -3,7 +3,7 @@ import socket
 proxy = '0.0.0.0'    # any available network interface
 proxyPort = 8080     # any available port: 0
 request = open("request.txt", "a")
-resource = open("resource.txt", "a")
+response = open("response.txt", "a")
 connectionCount = 0
 
 # establishing Client - Proxy connection
@@ -38,8 +38,8 @@ while True:
 
     hostHeader = None
     for line in requestLines:
-        if line.startswith('Host: '):
-            hostHeader = line[6:]
+        if line.startswith('Host: '):   # pick Host entry out of the request HTTP header
+            hostHeader = line[6:]       # safe it without the 'Host: ' prefix
             break
 
     hostIP = socket.gethostbyname(hostHeader)
@@ -51,27 +51,27 @@ while True:
     print("Proxy - Host connection established\n" + "host IP: " + str(hostIP) + "\n" + "host Port: " + str(hostPort) + "\n")
     hostSocket.sendall(requestData)     # forward request to host
 
-    # handling the resources
-    resourceData = hostSocket.recv(4096)
-    if not resourceData:
+    # handling the response
+    responseData = hostSocket.recv(4096)
+    if not responseData:
         hostSocket.close()
         clientSocket.close()
-        print("no host resource")
+        print("no host response")
         continue
 
-    rsourceLines = resourceData.decode('utf-8').split('\r\n')
+    rsourceLines = responseData.decode('utf-8').split('\r\n')
     if len(rsourceLines) < 1:
-        print("empty host resource")
+        print("empty host response")
         continue
-    resource.write("connection Number: " + str(connectionCount) + "\n\n")
-    resource.write(resourceData.decode('utf-8'))
-    resource.write("\n--------------------------------------------\n\n")
-    print("Host resource parsed into resource.txt\n")
+    response.write("connection Number: " + str(connectionCount) + "\n\n")
+    response.write(responseData.decode('utf-8'))
+    response.write("\n--------------------------------------------\n\n")
+    print("Host response parsed into response.txt\n")
 
     hostSocket.close()
     print("Proxy - Host connection closed\n")
 
-    clientSocket.sendall(resourceData)      # forward resource to client
+    clientSocket.sendall(responseData)      # forward response to client
     clientSocket.close()
     print("Client - Proxy connection closed\n")
 
