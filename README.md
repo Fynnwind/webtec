@@ -113,7 +113,7 @@ One can use a proxy to inject anything into the http response here is an example
 
 ## Group Work 5
 ### Task
-Create 2 virtual webservers with httpd within a openBSD machine using the following techniques:
+Create 2 virtual webservers with httpd within an OpenBSD virtual machine using the following techniques:
 1. Name based hosting
 2. IP based hosting
 3. Port based hosting
