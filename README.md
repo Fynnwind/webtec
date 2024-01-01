@@ -160,8 +160,9 @@ Create 2 virtual webservers with httpd within an OpenBSD virtual machine using t
     10. Open a browser on your host machine and type `web.local:81` into the addressbar
 
 **Note:**
-1. For added convinience extract the ip-address of the virtual machine (e.g. with `ifconfig`-cmd). Then run `ssh username@ipAddress` on your host machine in order to start a remote shell.
-2. You may want to delete anything you appended to `/etc/hosts`.
+1. One can stop httpd by running `rcctl stop httpd`
+2. For added convinience extract the ip-address of the virtual machine (e.g. with `ifconfig`-cmd). Then run `ssh username@ipAddress` on your host machine in order to start a remote shell.
+3. You may want to delete anything you appended to `/etc/hosts`.
 
 ## Group Work 6
 ### Task
