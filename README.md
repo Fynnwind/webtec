@@ -53,7 +53,7 @@ Implement a tiny proxy that fulfills the following requirements:
 
 ### Usage
 1. Start a shell and run `python minimal-web-proxy`
-2. Start a second shell and run `curl -x localhost:80 example.com`
+2. Start a second shell and run `curl -x localhost:8080 example.com`
 3. Repeat step 2 a vew times with diffrent web pages
 4. Go back in the first shell and stop the proxy via `ctrl + c`
 5. Take a look at the produced files `request.txt` and `response.txt`
@@ -80,7 +80,13 @@ Create a simple web page in HTML that provides a basic calculator (supports + - 
 ### Usage
 1. Open `./basic-calculator.html` with a browser
 
-**Note:** The calculator can be injected using the proxy of **Group Work 2** TODO
+### Addition
+One can use a proxy to inject anything into the http response here is an example proxy `./injection-web-proxy.py`. It is based on `./minimal-web-proxy.py` from **Group Work 2** and injects the calculator into an html page served via http.
+
+**Usage:**
+1. Start a shell end run `python minimal-web-proxy`
+2. Start a second shell and`curl -x localhost:8080 example.com > modifiedExample.html`
+3. Open `./modifiedExample.html` with a browser
 
 ## Group Work 5
 ### Task
