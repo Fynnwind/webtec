@@ -64,6 +64,12 @@ Implement a tiny proxy that fulfills the following requirements:
 2. Provide an XSL to represent the example file in HTML/4.01
 3. Provide the example web page programmes in HTML/4.01 as XHTML document
 
+### Solution
+TODO
+
+### Usage
+TODO
+
 ## Group Work 4
 ### Task
 Create a simple web page in HTML that provides a basic calculator (supports + - * /) by embedding JavaScript code.
@@ -73,6 +79,8 @@ Create a simple web page in HTML that provides a basic calculator (supports + - 
 
 ### Usage
 1. Open `./basic-calculator.html` with a browser
+
+**Note:** The calculator can be injected using the proxy of **Group Work 2** TODO
 
 ## Group Work 5
 ### Task
@@ -96,7 +104,7 @@ Create 2 virtual webservers with httpd within a openBSD machine using the follow
     5. Run `mkdir -p /var/www/site2/www` within the vm (requires su permissions)
     6. Run `rcctl enable httpd` within the vm (requires su permissions)
     7. Run `rcctl start httpd` within the vm (requires su permissions)
-    8. Start a shell on your host machine and append the contents of `./Vertual-Web-Servers/Namebased/hosts` to `/etc/hosts`
+    8. Start a shell on your host machine and append the contents of `./Vertual-Web-Servers/Namebased/hosts` to `/etc/hosts` (requires su permissions)
     9. Open a browser on your host machine and type `web1.local` into the addressbar
     10. Open a browser on your host machine and type `web2.local` into the addressbar
 2. IP based hosting
@@ -107,7 +115,7 @@ Create 2 virtual webservers with httpd within a openBSD machine using the follow
     5. Run `mkdir -p /var/www/site2/www` within the vm (requires su permissions)
     6. Run `rcctl enable httpd` within the vm (requires su permissions)
     7. Run `rcctl start httpd` within the vm (requires su permissions)
-    8. Start a shell on your host machine and append the contents of `./Vertual-Web-Servers/IPbased/hosts` to `/etc/hosts`
+    8. Start a shell on your host machine and append the contents of `./Vertual-Web-Servers/IPbased/hosts` to `/etc/hosts` (requires su permissions)
     9. Open a browser on your host machine and type `web1.local` into the addressbar
     10. Open a browser on your host machine and type `web2.local` into the addressbar
 3. Port based hosting
@@ -118,7 +126,7 @@ Create 2 virtual webservers with httpd within a openBSD machine using the follow
     5. Run `mkdir -p /var/www/site2/www` within the vm (requires su permissions)
     6. Run `rcctl enable httpd` within the vm (requires su permissions)
     7. Run `rcctl start httpd` within the vm (requires su permissions)
-    8. Start a shell on your host machine and append the contents of `./Vertual-Web-Servers/Namebased/hosts` to `/etc/hosts`
+    8. Start a shell on your host machine and append the contents of `./Vertual-Web-Servers/Namebased/hosts` to `/etc/hosts` (requires su permissions)
     9. Open a browser on your host machine and type `web.local:80` into the addressbar
     10. Open a browser on your host machine and type `web.local:81` into the addressbar
 
@@ -128,11 +136,37 @@ Create 2 virtual webservers with httpd within a openBSD machine using the follow
 
 ## Group Work 6
 ### Task
-Implement a tiny webserver that fulfills the following requirements:
+1. Implement a tiny webserver that supports name based virtual hosting and fulfills the following requirements
+2. Implement a tiny proxy that prints all traffic (TODO: ,has a timeout) and fulfills the following requirements
+- target system OpenBSD virtual machine
 - written in Javascript and running in node.js
-- supports name based virtual hosting
 
 ### Solution
-`./node/minimal-web-server.js`
+`./node`
+1. `./node/minimal-web-server.js`, `./node/hosts`
+2. `./node/minimal-web-proxy.js`
+
+### Usage
+1. Tiny webserver
+    1. Deploy an OpenBSD virtual machine with one network-adapter in bridge mode
+    2. Start a shell inside the vm and run `ifconfig`. The ipv4-address which can be found under em0 will be referred to as `<ipv4address>`
+    3. Place `./node/minimal-web-server.js` inside a `directory` of your choice within the vm
+    4. Run `node minimal-web-server.js` inside the `directory` within the vm
+    5. Start a shell on your host machine and append the contents of `./node/hosts` to `/etc/hosts` (requires su permissions)
+    6. Run `curl http://web1.local:8080` on your host machine
+    7. Run `curl http://web2.local:8080` on your host machine
+    8. Run `curl http://<ipv5address>:8080` on your host machine
+2. Tiny webproxy
+    1. Deploy an OpenBSD virtual machine with one network-adapter in bridge mode
+    2. Start a shell inside the vm and run `ifconfig`. The ipv4-address which can be found under em0 will be referred to as `<ipv4address>`
+    3. Place `./node/minimal-web-proxy.js` inside a `directory` of your choice within the vm
+    4. Run `node minimal-web-proxy.js` inside the `directory` within the vm
+    5. Start a shell on your host machine and run `curl -x <ipv4address>:8080 example.com`
+  
+## Group Work 7
+### Task
+Provide a REST-API for the calculator developed in **Group Work 4**
+
+### Solution
 
 ### Usage
