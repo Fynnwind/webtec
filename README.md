@@ -107,7 +107,7 @@ Create a simple web page in HTML that provides a basic calculator (supports + - 
 One can use a proxy to inject anything into the http response here is an example proxy `./injection-web-proxy.py`. It is based on `./minimal-web-proxy.py` from **Group Work 2** and injects the calculator into an html page served via http.
 
 **Usage:**
-1. Start a shell end run `python minimal-web-proxy`
+1. Start a shell end run `python injection-web-proxy.py`
 2. Start a second shell and`curl -x localhost:8080 example.com > modifiedExample.html`
 3. Open `./modifiedExample.html` with a browser
 
