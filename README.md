@@ -161,7 +161,7 @@ Create 2 virtual webservers with httpd within a openBSD machine using the follow
     5. Start a shell on your host machine and append the contents of `./node/hosts` to `/etc/hosts` (requires su permissions)
     6. Run `curl http://web1.local:8080` on your host machine
     7. Run `curl http://web2.local:8080` on your host machine
-    8. Run `curl http://<ipv5address>:8080` on your host machine
+    8. Run `curl http://<ipv4address>:8080` on your host machine
 2. Tiny webproxy
     1. Deploy an OpenBSD virtual machine with one network-adapter in bridge mode
     2. Start a shell inside the vm and run `ifconfig`. The ipv4-address which can be found under em0 will be referred to as `<ipv4address>`
