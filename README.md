@@ -5,6 +5,10 @@ All group work and a summary of the web-technologies lecture at THI in the winte
 ```
 .
 ├── README.md
+├── SGML
+│   ├── simple-xhtml.html
+│   ├── simple-xsl.xml
+│   └── simple.html
 ├── Virtual-Web-Servers
 │   ├── IPbased
 │   │   ├── hosts
@@ -68,7 +72,10 @@ Implement a tiny proxy that fulfills the following requirements:
 3. Provide the example web page programmes in HTML/4.01 as XHTML document
 
 ### Solution
-TODO
+`./SGML`
+1. `./SGML/simple.html`
+2. `./SGML/simple.xsl`
+3. `./SGML/simple-xhtml.html`
 
 ### Usage
 TODO
