@@ -6,19 +6,20 @@ All group work and a summary of the web-technologies lecture at THI in the winte
 .
 ├── README.md
 ├── Virtual-Web-Servers
-│   ├── IPbased
-│   │   ├── hosts
-│   │   └── httpd.conf
-│   ├── Namebased
-│   │   ├── hosts
-│   │   └── httpd.conf
-│   └── Portbased
-│       ├── hosts
-│       └── httpd.conf
+│   ├── IPbased
+│   │   ├── hosts
+│   │   └── httpd.conf
+│   ├── Namebased
+│   │   ├── hosts
+│   │   └── httpd.conf
+│   └── Portbased
+│       ├── hosts
+│       └── httpd.conf
 ├── basic-calculator.html
 ├── minimal-web-proxy.py
 ├── minimal-web-server.py
 └── node
+    ├── hosts
     ├── minimal-web-proxy.js
     └── minimal-web-server.js
 ```
