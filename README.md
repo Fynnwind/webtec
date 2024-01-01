@@ -72,17 +72,26 @@ Implement a tiny proxy that fulfills the following requirements:
 ## Group Work 3
 ### Task
 1. Create a simple web page in HTML/4.01
-2. Provide an XSL to represent the example file in HTML/4.01
-3. Provide the example web page programmes in HTML/4.01 as XHTML document
+2. Create a internal and external DTD for `./SGML/example.xml`
+3. Create an XSL to transform `./SGML/example.xml` in HTML/4.01
+4. Transform `./SGML/example.xml` using the XSL from 3. and make it an XHTML document
 
 ### Solution
 `./SGML`
 1. `./SGML/simple.html`
-2. `./SGML/simple.xsl`
-3. `./SGML/simple-xhtml.html`
+2. `./SGML/internal-dtd-example.xml`, `./SGML/external.dtd`, `./SGML/external-dtd-example.xml`
+3. `./SGML/example.xsl`
+4. `./SGML/example.html`
 
 ### Usage
-TODO
+1. Open `./SGML/simple.html` with a browser
+2. \-
+3. \-
+4. Transformation
+    1. Go to http://xsltransform.net/ and paste the contents of `./SGML/example.xml` and `./SGML/example.xsl` accordingly
+    2. Safe the result with a html file extension e.g. `example.html`
+    3. Open `example.html` with a browser
+    4. One can transform `example.html` into an XHTML conform document with minor adjustments (should look like `./SGML/example.html`)
 
 ## Group Work 4
 ### Task
