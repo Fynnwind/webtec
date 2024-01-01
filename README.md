@@ -16,12 +16,14 @@ All group work and a summary of the web-technologies lecture at THI in the winte
 │       ├── hosts
 │       └── httpd.conf
 ├── basic-calculator.html
+├── injection-web-proxy.py
 ├── minimal-web-proxy.py
 ├── minimal-web-server.py
 └── node
     ├── hosts
     ├── minimal-web-proxy.js
-    └── minimal-web-server.js
+    ├── minimal-web-server.js
+    └── rest-api-server.js
 ```
 ## Summary
 
@@ -81,7 +83,13 @@ Create a simple web page in HTML that provides a basic calculator (supports + - 
 ### Usage
 1. Open `./basic-calculator.html` with a browser
 
-**Note:** The calculator can be injected using the proxy of **Group Work 2** TODO
+### Addition
+One can use a proxy to inject anything into the http response here is an example proxy `./injection-web-proxy.py`. It is based on `./minimal-web-proxy.py` from **Group Work 2** and injects the calculator into an html page served via http.
+
+**Usage:**
+1. Start a shell end run `python minimal-web-proxy`
+2. Start a second shell and`curl -x localhost:8080 example.com > modifiedExample.html`
+3. Open `./modifiedExample.html` with a browser
 
 ## Group Work 5
 ### Task
@@ -156,7 +164,7 @@ Create 2 virtual webservers with httpd within a openBSD machine using the follow
     5. Start a shell on your host machine and append the contents of `./node/hosts` to `/etc/hosts` (requires su permissions)
     6. Run `curl http://web1.local:8080` on your host machine
     7. Run `curl http://web2.local:8080` on your host machine
-    8. Run `curl http://<ipv5address>:8080` on your host machine
+    8. Run `curl http://<ipv4address>:8080` on your host machine
 2. Tiny webproxy
     1. Deploy an OpenBSD virtual machine with one network-adapter in bridge mode
     2. Start a shell inside the vm and run `ifconfig`. The ipv4-address which can be found under em0 will be referred to as `<ipv4address>`
@@ -169,5 +177,10 @@ Create 2 virtual webservers with httpd within a openBSD machine using the follow
 Provide a REST-API for the calculator developed in **Group Work 4**
 
 ### Solution
+`./node/rest-api-server.js`
 
 ### Usage
+1. Deploy an OpenBSD virtual machine with one network-adapter in bridge mode
+2. Place `./node/rest-api-server.js` inside a `directory` of your choice within the vm
+3. Start a shell inside the vm an run `node rest-api-server.js` inside the `directory` within the vm
+4. 
