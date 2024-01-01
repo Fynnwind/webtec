@@ -1,0 +1,16 @@
+<!DOCTYPE addressbook SYSTEM "addressbook.dtd">
+
+<addressbook>
+  <address>
+    <name>Jon</name>
+    <lastname>Doe</lastname>
+    <phone type="mobile">+49 123 1234567</phone>
+    <phone type="work">+49 30 1234567</phone>
+    <location type="work">
+      <street>Sampleway 14</street>
+      <poc>12345</poc>
+      <city>Sampletown</city>
+    </location>
+  </address>
+</addressbook>
+

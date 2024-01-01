@@ -1,0 +1,14 @@
+<!--external XML dtd (webTechnologies exercise)-->
+
+<!ELEMENT addressbook (address)>
+<!ELEMENT address (name, lastname, phone+, location)>
+<!ELEMENT name (#PCDATA)>
+<!ELEMENT lastname (#PCDATA)>
+<!ELEMENT phone (#PCDATA)>
+<!ATTLIST phone type CDATA #REQUIRED>
+<!ELEMENT location (street, poc, city)>
+<!ATTLIST location type CDATA #REQUIRED>
+<!ELEMENT street (#PCDATA)>
+<!ELEMENT poc (#PCDATA)>
+<!ELEMENT city (#PCDATA)>
+

@@ -6,8 +6,12 @@ All group work and a summary of the web-technologies lecture at THI in the winte
 .
 ├── README.md
 ├── SGML
-│   ├── simple-xhtml.html
-│   ├── simple-xsl.xml
+│   ├── example.html
+│   ├── example.xml
+│   ├── example.xsl
+│   ├── external-dtd-example.xml
+│   ├── external.dtd
+│   ├── internal-dtd-example.xml
 │   └── simple.html
 ├── Virtual-Web-Servers
 │   ├── IPbased

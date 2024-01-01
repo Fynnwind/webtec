@@ -1,0 +1,32 @@
+<!--internal XML dtd (webTechnologies exercise)-->
+
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE addressbook [
+  <!ELEMENT addressbook (address)>
+  <!ELEMENT address (name, lastname, phone+, location)>
+  <!ELEMENT name (#PCDATA)>
+  <!ELEMENT lastname (#PCDATA)>
+  <!ELEMENT phone (#PCDATA)>
+  <!ATTLIST phone type CDATA #REQUIRED>
+  <!ELEMENT location (street, poc, city)>
+  <!ATTLIST location type CDATA #REQUIRED>
+  <!ELEMENT street (#PCDATA)>
+  <!ELEMENT poc (#PCDATA)>
+  <!ELEMENT city (#PCDATA)>
+]>
+
+<addressbook>
+  <address>
+    <name>Jon</name>
+    <lastname>Doe</lastname>
+    <phone type="mobile">+49 123 1234567</phone>
+    <phone type="work">+49 30 1234567</phone>
+    <location type="work">
+      <street>Sampleway 14</street>
+      <poc>12345</poc>
+      <city>Sampletown</city>
+    </location>
+  </address>
+</addressbook>
+
