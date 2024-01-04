@@ -32,7 +32,10 @@ All group work and a summary of the web-technologies lecture at THI in the winte
     ├── calc-rest-server.js
     ├── hosts
     ├── minimal-web-proxy.js
-    └── minimal-web-server.js
+    ├── minimal-web-server.js
+    ├── reset.json
+    ├── user-management-rest-server.mjs
+    └── user.json
 ```
 ## Summary
 
@@ -199,6 +202,7 @@ Create 2 virtual webservers with httpd within an OpenBSD virtual machine using t
 Provide a REST-API for the calculator developed in **Group Work 4**
 
 ### Solution
+`./node`\
 `./node/calc-rest-server.js`, `./node/calc-rest-client.html`
 
 ### Usage
@@ -216,3 +220,29 @@ Provide a REST-API for the calculator developed in **Group Work 4**
 One can test the REST-API using a modified version of **Group Work 4** as an client run by your browser.
 1. Open a Browser without CORS
 2. Open `./node/calc-rest-client.html` within that browser
+
+## Group Work 8
+### Task
+Provide a REST-API that handles users with the following requirenments:
+- sign up
+- sign in (creating a session)
+- password reset
+
+### Solution
+`./node`\
+`./node/user-management-rest-server.mjs`, `./node/user.json`, `./node/reset.json`
+
+### Usage
+1. Deploy an OpenBSD virtual machine with one network-adapter in bridge mode
+2. Start a shell inside the vm and run `ifconfig`. The ipv4-address which can be found under em0 will be referred to as `<ipv4address>`
+3. Place `./node/user-management-rest-server.mjs` inside a `directory1` of your choice within the vm
+4. Start a shell inside the vm an run `node user-management-rest-server.mjs` inside the `directory1` within the vm
+5. Place `./node/user.json` and `./node/reset.json` inside a `directory2` of your choice on your host machine
+6. Start a shell on your host machine and run the following curls inside the `directory2`:
+    1. `curl http://<ipv4address>:8080/users`    (gives you all existing users)
+    2. `curl -d @user.json -H "Content-Type: application/json" -X POST http://<ipv4address>:8080/users`     (creates the user specified in `user.json`)
+    3. `curl -d @user.json -H "Content-Type: application/json" -X POST http://<ipv4address>:8080/login`     (creates a session for the user specified in `user.json`)
+    4. `curl -d @reset.json -H "Content-Type: application/json" -X POST http://10.30.80.121:8080/pwreset`    (sets a new password for the user with the specified `id`)
+
+**Note:**
+Run the first curl inbetween the others to see the effect of them.
