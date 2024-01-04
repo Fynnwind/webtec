@@ -206,11 +206,11 @@ Provide a REST-API for the calculator developed in **Group Work 4**
 2. Start a shell inside the vm and run `ifconfig`. The ipv4-address which can be found under em0 will be referred to as `<ipv4address>`
 3. Place `./node/calc-rest-server.js` inside a `directory` of your choice within the vm
 4. Start a shell inside the vm an run `node rest-api-server.js` inside the `directory` within the vm
-5. Run the following curls for Testing:
-    1. curl GET http://<ipv4address>:8080/add\?arg1\=1\&arg2\=2
-    2. curl GET http://<ipv4address>:8080/sub\?arg1\=3\&arg2\=1
-    3. curl GET http://<ipv4address>:8080/mul\?arg1\=5\&arg2\=3
-    4. curl GET http://<ipv4address>:8080/div\?arg1\=10\&arg2\=0
+5. Start a shell on your host machine and run:
+    1. `curl GET http://<ipv4address>:8080/add\?arg1\=1\&arg2\=2`
+    2. `curl GET http://<ipv4address>:8080/sub\?arg1\=3\&arg2\=1`
+    3. `curl GET http://<ipv4address>:8080/mul\?arg1\=5\&arg2\=3`
+    4. `curl GET http://<ipv4address>:8080/div\?arg1\=10\&arg2\=0`
 
 **Note:**
 One can test the REST-API using a modified version of **Group Work 4** as an client run by your browser.
