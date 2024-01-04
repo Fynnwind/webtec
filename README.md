@@ -199,8 +199,7 @@ Create 2 virtual webservers with httpd within an OpenBSD virtual machine using t
 Provide a REST-API for the calculator developed in **Group Work 4**
 
 ### Solution
-`./node/calc-rest-server.js`
-`./node/calc-rest-client.html`
+`./node/calc-rest-server.js`, `./node/calc-rest-client.html`
 
 ### Usage
 1. Deploy an OpenBSD virtual machine with one network-adapter in bridge mode
