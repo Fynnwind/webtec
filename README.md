@@ -246,3 +246,13 @@ Provide a REST-API that handles users with the following requirenments:
 
 **Note:**
 Run the first curl inbetween the others to see the effect of them.
+
+## Group Work 9
+### Task
+Create a react frontend for the calculator developed in **Group Work 4**
+
+### Solution
+WIP
+
+### Usage
+WIP
