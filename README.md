@@ -107,61 +107,62 @@ Create a simple web page in HTML that provides a basic calculator (supports + - 
 One can use a proxy to inject anything into the http response here is an example proxy `./injection-web-proxy.py`. It is based on `./minimal-web-proxy.py` from **Group Work 2** and injects the calculator into an html page served via http.
 
 **Usage:**
-1. Start a shell end run `python minimal-web-proxy`
+1. Start a shell end run `python injection-web-proxy.py`
 2. Start a second shell and`curl -x localhost:8080 example.com > modifiedExample.html`
 3. Open `./modifiedExample.html` with a browser
 
 ## Group Work 5
 ### Task
-Create 2 virtual webservers with httpd within a openBSD machine using the following techniques:
+Create 2 virtual webservers with httpd within an OpenBSD virtual machine using the following techniques:
 1. Name based hosting
 2. IP based hosting
 3. Port based hosting
 
 ### Solution
-`./Vertual-Web-Servers`
-1. `./Vertual-Web-Servers/Namebased`
-2. `./Vertual-Web-Servers/IPbased`
-3. `./Vertual-Web-Servers/Portbased`
+`./Virtual-Web-Servers`
+1. `./Virtual-Web-Servers/Namebased`
+2. `./Virtual-Web-Servers/IPbased`
+3. `./Virtual-Web-Servers/Portbased`
 
 ### Usage
 1. Name based hosting
     1. Deploy an OpenBSD virtual machine with one network-adapter in bridge mode
     2. Start a shell inside the vm and run `ifconfig`. The ipv4-address which can be found under em0 will be referred to as `<ipv4address>`
-    3. Place `./Vertual-Web-Servers/Namebased/httpd.conf` at `/etc/httpd.conf` within the vm (requires su permissions)
+    3. Place `./Virtual-Web-Servers/Namebased/httpd.conf` at `/etc/httpd.conf` within the vm (requires su permissions)
     4. Run `mkdir -p /var/www/site1/www` within the vm (requires su permissions)
     5. Run `mkdir -p /var/www/site2/www` within the vm (requires su permissions)
     6. Run `rcctl enable httpd` within the vm (requires su permissions)
     7. Run `rcctl start httpd` within the vm (requires su permissions)
-    8. Start a shell on your host machine and append the contents of `./Vertual-Web-Servers/Namebased/hosts` to `/etc/hosts` (requires su permissions)
+    8. Start a shell on your host machine and append the contents of `./Virtual-Web-Servers/Namebased/hosts` to `/etc/hosts` (requires su permissions)
     9. Open a browser on your host machine and type `web1.local` into the addressbar
     10. Open a browser on your host machine and type `web2.local` into the addressbar
 2. IP based hosting
     1. Deploy an OpenBSD virtual machine with two network-adapters in bridge mode
     2. Start a shell inside the vm and run `ifconfig`. The ipv4-addresss which can be found under em0 and em1 will be referred to as `<ipv4address.em0>`and `<ipv4address.em1>`
-    3. Place `./Vertual-Web-Servers/IPbased/httpd.conf` at `/etc/httpd.conf` within the vm (requires su permissions)
+    3. Place `./Virtual-Web-Servers/IPbased/httpd.conf` at `/etc/httpd.conf` within the vm (requires su permissions)
     4. Run `mkdir -p /var/www/site1/www` within the vm (requires su permissions)
     5. Run `mkdir -p /var/www/site2/www` within the vm (requires su permissions)
     6. Run `rcctl enable httpd` within the vm (requires su permissions)
     7. Run `rcctl start httpd` within the vm (requires su permissions)
-    8. Start a shell on your host machine and append the contents of `./Vertual-Web-Servers/IPbased/hosts` to `/etc/hosts` (requires su permissions)
+    8. Start a shell on your host machine and append the contents of `./Virtual-Web-Servers/IPbased/hosts` to `/etc/hosts` (requires su permissions)
     9. Open a browser on your host machine and type `web1.local` into the addressbar
     10. Open a browser on your host machine and type `web2.local` into the addressbar
 3. Port based hosting
     1. Deploy an OpenBSD virtual machine with one network-adapter in bridge mode
     2. Start a shell inside the vm and run `ifconfig`. The ipv4-address which can be found under em0 will be referred to as `<ipv4address>`
-    3. Place `./Vertual-Web-Servers/Namebased/httpd.conf` at `/etc/httpd.conf` within the vm (requires su permissions)
+    3. Place `./Virtual-Web-Servers/Namebased/httpd.conf` at `/etc/httpd.conf` within the vm (requires su permissions)
     4. Run `mkdir -p /var/www/site1/www` within the vm (requires su permissions)
     5. Run `mkdir -p /var/www/site2/www` within the vm (requires su permissions)
     6. Run `rcctl enable httpd` within the vm (requires su permissions)
     7. Run `rcctl start httpd` within the vm (requires su permissions)
-    8. Start a shell on your host machine and append the contents of `./Vertual-Web-Servers/Namebased/hosts` to `/etc/hosts` (requires su permissions)
+    8. Start a shell on your host machine and append the contents of `./Virtual-Web-Servers/Namebased/hosts` to `/etc/hosts` (requires su permissions)
     9. Open a browser on your host machine and type `web.local:80` into the addressbar
     10. Open a browser on your host machine and type `web.local:81` into the addressbar
 
 **Note:**
-1. For added convinience extract the ip-address of the virtual machine (e.g. with `ifconfig`-cmd). Then run `ssh username@ipAddress` on your host machine in order to start a remote shell.
-2. You may want to delete anything you appended to `/etc/hosts`.
+1. One can stop httpd by running `rcctl stop httpd`
+2. For added convinience extract the ip-address of the virtual machine (e.g. with `ifconfig`-cmd). Then run `ssh username@ipAddress` on your host machine in order to start a remote shell.
+3. You may want to delete anything you appended to `/etc/hosts`.
 
 ## Group Work 6
 ### Task
