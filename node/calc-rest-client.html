@@ -2,10 +2,10 @@
 <html>
  <head>
   <title>Till Taschenrechner</title>
-  <meta name="Generator" content="Ich">
+  <meta name="Generator" content="me">
   <meta name="Author" content="Till Hoffmann">
   <meta name="Keywords" content="Calculator">
-  <meta name="Description" content="">
+  <meta name="Description" content="A client for calc-rest-server.js">
   <meta charset="utf-8"/>
   <script type="text/javascript">
     function opeval() {
@@ -13,7 +13,7 @@
 		var a2 = document.getElementById("arg2").value;
 		var op = document.getElementById("op").value;
 		var Http = new XMLHttpRequest();
-		var url='http://10.30.80.121:8080/' + op + '?arg1=' + a1 + '&arg2=' + a2;
+		var url='http://<ipv4address>:8080/' + op + '?arg1=' + a1 + '&arg2=' + a2;
 		Http.open("GET", url);
 		Http.send();
 
