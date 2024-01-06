@@ -42,6 +42,11 @@ All group work and a summary of the web-technologies lecture at THI in the winte
 
 WIP
 
+## Note
+- To add node to an OpenBSD system make sure you have root permissions and run `pkg_add node`
+- If node throws a package not found exception run `npm install <name>`
+- In `hosts` files, `./node/App.js` and `./node/calc-rest-client.html` one needs to replace `<ipv4address>` accordingly
+
 ## Group Work 1
 ### Task
 Implement a tiny webserver that fulfills the following requirements:
@@ -261,8 +266,3 @@ Create a react frontend for the backend `./node/calc-rest-server.js` developed i
 5. Start a shell on your host machine and run  `npx create-react-app calc-rest-frontend` then `cd calculator-frontend`
 6. Replace the `./src/App.js` on your host machine with `./node/App.js` from this repo
 7. Run `npm start`
-
-## Note
-- To add node to an OpenBSD system make sure you have root permissions and run `pkg_add node`
-- If node throws a package not found exception run `npm install <name>`
-- In `hosts` files, `./node/App.js` and `./node/calc-rest-client.html` one needs to replace `<ipv4address>` accordingly
