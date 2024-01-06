@@ -45,7 +45,7 @@ WIP
 ## Note
 - To add node to an OpenBSD system make sure you have root permissions and run `pkg_add node`
 - If node throws a package not found exception run `npm install <name>`
-- In `hosts` files, `./node/App.js` and `./node/calc-rest-client.html` one needs to replace `<ipv4address>` accordingly
+- In `hosts` files, `./Virtual-Web-Servers/IPbased/httpd.conf`, `./node/App.js` and `./node/calc-rest-client.html` one needs to replace `<ipv4address>` accordingly
 
 ## Group Work 1
 ### Task
