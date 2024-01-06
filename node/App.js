@@ -8,7 +8,7 @@ function App() {
     const [result, setResult] = useState('');
     const [operation, setOperation] = useState('');
 
-    const baseURL = 'http://10.30.81.26:8080';
+    const baseURL = 'http://<ipv4address>:8080';
 
     const handleOperation = async (op) => {
         try {
