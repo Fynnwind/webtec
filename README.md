@@ -28,6 +28,7 @@ All group work and a summary of the web-technologies lecture at THI in the winte
 ├── minimal-web-proxy.py
 ├── minimal-web-server.py
 └── node
+    ├── App.js
     ├── calc-rest-client.html
     ├── calc-rest-server.js
     ├── hosts
@@ -40,6 +41,11 @@ All group work and a summary of the web-technologies lecture at THI in the winte
 ## Summary
 
 WIP
+
+## Note
+- To add node to an OpenBSD system make sure you have root permissions and run `pkg_add node`
+- If node throws a package not found exception run `npm install <name>`
+- In `hosts` files, `./node/App.js` and `./node/calc-rest-client.html` one needs to replace `<ipv4address>` accordingly
 
 ## Group Work 1
 ### Task
@@ -217,9 +223,7 @@ Provide a REST-API for the calculator developed in **Group Work 4**
     4. `curl GET http://<ipv4address>:8080/div\?arg1\=10\&arg2\=0`
 
 **Note:**
-One can test the REST-API using a modified version of **Group Work 4** as an client run by your browser.
-1. Open a Browser without CORS
-2. Open `./node/calc-rest-client.html` within that browser
+Instead of 5. one can open `./node/calc-rest-client.html`
 
 ## Group Work 8
 ### Task
@@ -249,10 +253,16 @@ Run the first curl inbetween the others to see the effect of them.
 
 ## Group Work 9
 ### Task
-Create a react frontend for the calculator developed in **Group Work 4**
+Create a react frontend for the backend `./node/calc-rest-server.js` developed in **Group Work 7**
 
 ### Solution
-WIP
+`./node/App.js`
 
 ### Usage
-WIP
+1. Deploy an OpenBSD virtual machine with one network-adapter in bridge mode
+2. Start a shell inside the vm and run `ifconfig`. The ipv4-address which can be found under em0 will be referred to as `<ipv4address>`
+3. Place `./node/user-management-rest-server.mjs` inside a `directory1` of your choice within the vm
+4. Start a shell inside the vm an run `node user-management-rest-server.mjs` inside the `directory1` within the vm
+5. Start a shell on your host machine and run  `npx create-react-app calc-rest-frontend` then `cd calculator-frontend`
+6. Replace the `./src/App.js` on your host machine with `./node/App.js` from this repo
+7. Run `npm start`
