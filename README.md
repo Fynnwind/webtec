@@ -261,8 +261,8 @@ Create a react frontend for the backend `./node/calc-rest-server.js` developed i
 ### Usage
 1. Deploy an OpenBSD virtual machine with one network-adapter in bridge mode
 2. Start a shell inside the vm and run `ifconfig`. The ipv4-address which can be found under em0 will be referred to as `<ipv4address>`
-3. Place `./node/user-management-rest-server.mjs` inside a `directory1` of your choice within the vm
-4. Start a shell inside the vm an run `node user-management-rest-server.mjs` inside the `directory1` within the vm
+3. Place `./node/calc-rest-server.mjs` inside a `directory` of your choice within the vm
+4. Start a shell inside the vm an run `node calc-rest-server.mjs` inside the `directory` within the vm
 5. Start a shell on your host machine and run  `npx create-react-app calc-rest-frontend` then `cd calculator-frontend`
 6. Replace the `./src/App.js` on your host machine with `./node/App.js` from this repo
 7. Run `npm start`
