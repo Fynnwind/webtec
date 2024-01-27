@@ -13,7 +13,7 @@
 		var a2 = document.getElementById("arg2").value;
 		var op = document.getElementById("op").value;
 		var xhttp = new XMLHttpRequest();
-		var url='http://172.20.10.4:8080/' + op + '?arg1=' + a1 + '&arg2=' + a2;
+		var url='http://<ipv4address>:8080/' + op + '?arg1=' + a1 + '&arg2=' + a2;
 		xhttp.open("GET", url);
 		xhttp.send();
 
