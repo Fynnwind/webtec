@@ -28,15 +28,20 @@ All group work and a summary of the web-technologies lecture at THI in the winte
 ├── minimal-web-proxy.py
 ├── minimal-web-server.py
 └── node
-    ├── App.js
-    ├── calc-rest-client.html
-    ├── calc-rest-server.js
+    ├── calc
+    │   ├── App.js
+    │   ├── calc-ajax-rest-client.html
+    │   └── calc-rest-server.mjs
     ├── hosts
     ├── minimal-web-proxy.js
     ├── minimal-web-server.js
-    ├── reset.json
-    ├── user-management-rest-server.mjs
-    └── user.json
+    └── user-management
+        ├── loggedIn-ajax.html
+        ├── login-ajax.html
+        ├── reset.json
+        ├── user-management-ajax-rest-server.js
+        ├── user-management-rest-server.js
+        └── user.json
 ```
 ## Summary
 
@@ -44,7 +49,7 @@ WIP
 
 ## Note
 - To add node to an OpenBSD system make sure you have root permissions and run `pkg_add node`
-- If node throws a package not found exception run `npm install <name>`
+- If node throws a package not found exception run `npm install <packagename>`
 - In `hosts` files, `./Virtual-Web-Servers/IPbased/httpd.conf`, `./node/App.js` and `./node/calc-rest-client.html` one needs to replace `<ipv4address>` accordingly
 
 ## Group Work 1
@@ -222,14 +227,11 @@ Provide a REST-API for the calculator developed in **Group Work 4**
     3. `curl GET http://<ipv4address>:8080/mul\?arg1\=5\&arg2\=3`
     4. `curl GET http://<ipv4address>:8080/div\?arg1\=10\&arg2\=0`
 
-**Note:**
-Instead of 5. one can open `./node/calc-rest-client.html`
-
 ## Group Work 8
 ### Task
 Provide a REST-API that handles users with the following requirenments:
-- sign up
-- sign in (creating a session)
+- register account
+- login (creating a session)
 - password reset
 
 ### Solution
@@ -246,7 +248,7 @@ Provide a REST-API that handles users with the following requirenments:
     1. `curl http://<ipv4address>:8080/users`    (gives you all existing users)
     2. `curl -d @user.json -H "Content-Type: application/json" -X POST http://<ipv4address>:8080/users`     (creates the user specified in `user.json`)
     3. `curl -d @user.json -H "Content-Type: application/json" -X POST http://<ipv4address>:8080/login`     (creates a session for the user specified in `user.json`)
-    4. `curl -d @reset.json -H "Content-Type: application/json" -X POST http://10.30.80.121:8080/pwreset`    (sets a new password for the user with the specified `id`)
+    4. `curl -d @reset.json -H "Content-Type: application/json" -X POST http://<ipv4address>:8080/pwreset`    (sets a new password for the user with the specified `id`)
 
 **Note:**
 Run the first curl inbetween the others to see the effect of them.
@@ -266,3 +268,20 @@ Create a react frontend for the backend `./node/calc-rest-server.js` developed i
 5. Start a shell on your host machine and run  `npx create-react-app calc-rest-frontend` then `cd calculator-frontend`
 6. Replace the `./src/App.js` on your host machine with `./node/App.js` from this repo
 7. Run `npm start`
+
+## Group Work 10
+### Task
+Create a AJAX frontend for the backend
+1. `./node/calc-rest-server.js` developed in **Group Work 7**
+2. `./node/user-management-rest-server.mjs` developed in **Group Work 8**
+
+### Solution
+`./node/`
+1. `./node/calc-ajax-rest-server.js`, `calc-ajax-rest-client.js`
+2. `./node/user-management-ajax-rest-server.mjs`, `user-management-ajax-rest-client`
+
+### Usage
+
+## Group Work 11
+### Task
+PHP
