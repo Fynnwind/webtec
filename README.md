@@ -258,7 +258,7 @@ Provide a REST-API that handles users with the following requirenments:
 
 ## Group Work 9
 ### Task
-Create a react frontend for the backend `./node/calc/calc-rest-server.js` developed in **Group Work 7**
+Create a react frontend for the backend `./node/calc/calc-rest-server.mjs` developed in **Group Work 7**
 
 ### Solution
 `./node/calc/App.js`
@@ -266,27 +266,38 @@ Create a react frontend for the backend `./node/calc/calc-rest-server.js` develo
 ### Usage
 1. Deploy an OpenBSD virtual machine with one network-adapter in bridge mode
 2. Start a shell inside the vm and run `ifconfig`. The ipv4-address which can be found under em0 will be referred to as `<ipv4address>`
-3. Place `./node/calc/calc-rest-server.js` inside a `directory` of your choice within the vm
-4. Start a shell inside the vm an run `node calc-rest-server.js` inside the `directory` within the vm
+3. Place `./node/calc/calc-rest-server.mjs` inside a `directory` of your choice within the vm
+4. Start a shell inside the vm an run `node calc-rest-server.mjs` inside the `directory` within the vm
 5. Start a shell on your host machine and run  `npx create-react-app calc-rest-frontend` then `cd calculator-frontend`
 6. Replace the `./src/App.js` on your host machine with `./node/App.js` from this repo
 7. Run `npm start`
 
 ## Group Work 10
 ### Task
-Modify `./node/user-management-rest-server.mjs` developed in **Group Work 8** and an ajax frontend that it handles
+Modify `./node/user-management-rest-server.mjs` developed in **Group Work 8** and develop an ajax frontend consisting of an login page and an content page.
+The following criterias need to be met
 - register account
 - login (creating a session)
 - logout (destroying a session)
 - password reset
 
-
 ### Solution
-`./node/`
-1. `./node/calc-ajax-rest-server.js`, `calc-ajax-rest-client.js`
-2. `./node/user-management-ajax-rest-server.mjs`, `user-management-ajax-rest-client`
+`./node/user-management`\
+`./node/user-management/user-management-ajax-rest-server.mjs`, `./node/user-management/login-ajax.html`, `./node/user-management/loggedIn-ajax.html`
 
 ### Usage
+1. Deploy an OpenBSD virtual machine with one network-adapter in bridge mode
+2. Start a shell inside the vm and run `ifconfig`. The ipv4-address which can be found under em0 will be referred to as `<ipv4address>`
+3. Place `./node/user-management/user-management-ajax-rest-server.mjs`, `./node/user-management/login-ajax.html`, `./node/user-management/loggedIn-ajax.html` inside a `directory` of your choice within the vm
+4. Start a shell inside the vm and run `node user-management-ajax-rest-server.mjs` inside the `directory` within the vm
+5. Open a browser on your host machine and type `http://<ipv4address>:8080/` into the addressbar
+
+**Note:** 
+- Start a shell on your host machine and run `curl http://<ipv4address>:8080/users` to print the current database entries
+- Registering the same username multiple times can lead to problems 
+- This Proof-of-Concept has two major security concerns
+    - Session are handeled in the html client not by the browser in form of cookies
+    - One can access the content page by calling the API endpoint directly
 
 ## Group Work 11
 ### Task
