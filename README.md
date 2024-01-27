@@ -50,7 +50,7 @@ WIP
 ## Note
 - To add node to an OpenBSD system make sure you have root permissions and run `pkg_add node`
 - If node throws a package not found exception run `npm install <packagename>`
-- In `hosts` files, `./Virtual-Web-Servers/IPbased/httpd.conf`, `./node/App.js` and `./node/calc-rest-client.html` one needs to replace `<ipv4address>` accordingly
+- In `hosts` files, `./Virtual-Web-Servers/IPbased/httpd.conf`, `./node/calc/App.js` and all files with an `.html` file extension in the `./node` directory one needs to replace `<ipv4address>` accordingly
 
 ## Group Work 1
 ### Task
@@ -213,19 +213,23 @@ Create 2 virtual webservers with httpd within an OpenBSD virtual machine using t
 Provide a REST-API for the calculator developed in **Group Work 4**
 
 ### Solution
-`./node`\
-`./node/calc-rest-server.js`, `./node/calc-rest-client.html`
+`./node/calc`\
+`./node/calc/calc-rest-server.js`, `./node/calc/calc-ajax-rest-client.html`
 
 ### Usage
 1. Deploy an OpenBSD virtual machine with one network-adapter in bridge mode
 2. Start a shell inside the vm and run `ifconfig`. The ipv4-address which can be found under em0 will be referred to as `<ipv4address>`
-3. Place `./node/calc-rest-server.js` inside a `directory` of your choice within the vm
+3. Place `./node/calc/calc-rest-server.js` inside a `directory` of your choice within the vm
 4. Start a shell inside the vm an run `node rest-api-server.js` inside the `directory` within the vm
 5. Start a shell on your host machine and run:
     1. `curl GET http://<ipv4address>:8080/add\?arg1\=1\&arg2\=2`
     2. `curl GET http://<ipv4address>:8080/sub\?arg1\=3\&arg2\=1`
     3. `curl GET http://<ipv4address>:8080/mul\?arg1\=5\&arg2\=3`
     4. `curl GET http://<ipv4address>:8080/div\?arg1\=10\&arg2\=0`
+
+**Note:** One can test the REST-API using `./node/calc/calc-ajax-rest-client.html` within an Browser
+1. Place `./node/calc/calc-ajax-rest-client.html` inside the `directory` within the vm
+2. Open a browser and type `<ipv4address>:8080` into the addressbar
 
 ## Group Work 8
 ### Task
@@ -235,13 +239,13 @@ Provide a REST-API that handles users with the following requirenments:
 - password reset
 
 ### Solution
-`./node`\
-`./node/user-management-rest-server.mjs`, `./node/user.json`, `./node/reset.json`
+`./node/user-management`\
+`./node/user-management/user-management-rest-server.mjs`, `./node/user-management/user.json`, `./node/user-management/reset.json`
 
 ### Usage
 1. Deploy an OpenBSD virtual machine with one network-adapter in bridge mode
 2. Start a shell inside the vm and run `ifconfig`. The ipv4-address which can be found under em0 will be referred to as `<ipv4address>`
-3. Place `./node/user-management-rest-server.mjs` inside a `directory1` of your choice within the vm
+3. Place `./node/user-management/user-management-rest-server.mjs` inside a `directory1` of your choice within the vm
 4. Start a shell inside the vm an run `node user-management-rest-server.mjs` inside the `directory1` within the vm
 5. Place `./node/user.json` and `./node/reset.json` inside a `directory2` of your choice on your host machine
 6. Start a shell on your host machine and run the following curls inside the `directory2`:
@@ -250,20 +254,19 @@ Provide a REST-API that handles users with the following requirenments:
     3. `curl -d @user.json -H "Content-Type: application/json" -X POST http://<ipv4address>:8080/login`     (creates a session for the user specified in `user.json`)
     4. `curl -d @reset.json -H "Content-Type: application/json" -X POST http://<ipv4address>:8080/pwreset`    (sets a new password for the user with the specified `id`)
 
-**Note:**
-Run the first curl inbetween the others to see the effect of them.
+**Note:** Run the first curl inbetween the others to see the effect of them.
 
 ## Group Work 9
 ### Task
-Create a react frontend for the backend `./node/calc-rest-server.js` developed in **Group Work 7**
+Create a react frontend for the backend `./node/calc/calc-rest-server.js` developed in **Group Work 7**
 
 ### Solution
-`./node/App.js`
+`./node/calc/App.js`
 
 ### Usage
 1. Deploy an OpenBSD virtual machine with one network-adapter in bridge mode
 2. Start a shell inside the vm and run `ifconfig`. The ipv4-address which can be found under em0 will be referred to as `<ipv4address>`
-3. Place `./node/calc-rest-server.js` inside a `directory` of your choice within the vm
+3. Place `./node/calc/calc-rest-server.js` inside a `directory` of your choice within the vm
 4. Start a shell inside the vm an run `node calc-rest-server.js` inside the `directory` within the vm
 5. Start a shell on your host machine and run  `npx create-react-app calc-rest-frontend` then `cd calculator-frontend`
 6. Replace the `./src/App.js` on your host machine with `./node/App.js` from this repo
@@ -271,9 +274,12 @@ Create a react frontend for the backend `./node/calc-rest-server.js` developed i
 
 ## Group Work 10
 ### Task
-Create a AJAX frontend for the backend
-1. `./node/calc-rest-server.js` developed in **Group Work 7**
-2. `./node/user-management-rest-server.mjs` developed in **Group Work 8**
+Modify `./node/user-management-rest-server.mjs` developed in **Group Work 8** and an ajax frontend that it handles
+- register account
+- login (creating a session)
+- logout (destroying a session)
+- password reset
+
 
 ### Solution
 `./node/`
