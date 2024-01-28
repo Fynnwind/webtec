@@ -1,7 +1,7 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
  <head>
-  <title>Till Taschenrechner</title>
+  <title>Till Calculator</title>
   <meta name="Generator" content="me">
   <meta name="Author" content="Till Hoffmann">
   <meta name="Keywords" content="Calculator">
@@ -12,14 +12,14 @@
 		var a1 = document.getElementById("arg1").value;
 		var a2 = document.getElementById("arg2").value;
 		var op = document.getElementById("op").value;
-		var Http = new XMLHttpRequest();
+		var xhttp = new XMLHttpRequest();
 		var url='http://<ipv4address>:8080/' + op + '?arg1=' + a1 + '&arg2=' + a2;
-		Http.open("GET", url);
-		Http.send();
+		xhttp.open("GET", url);
+		xhttp.send();
 
-		Http.onload = function(e) {
-		  console.log(Http.responseText);
-		  document.getElementById("res").innerHTML = Http.responseText;
+		xhttp.onload = function(e) {
+		  console.log(xhttp.responseText);
+		  document.getElementById("res").innerHTML = xhttp.responseText;
 		}
 	}
 	

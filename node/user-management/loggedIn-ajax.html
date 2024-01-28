@@ -1,0 +1,60 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+    <head>
+        <title>Till Content Page</title>
+        <meta name="Generator" content="me">
+        <meta name="Author" content="Till Hoffmann">
+        <meta name="Keywords" content="Content">
+        <meta name="Description" content="page to appear after login for the user-management-rest-server using ajax">
+        <meta charset="utf-8"/>
+        <script>
+            const baseUrl='http://<ipv4address>:8080'
+            function pwreset(event) {
+                const xhttp = new XMLHttpRequest();
+                const url = baseUrl + '/pwreset';
+                event.preventDefault();
+                const password = document.getElementsByName('psw')[0].value;
+                const session = JSON.parse(localStorage.getItem('session')).session;
+                xhttp.open("POST", url);
+                xhttp.setRequestHeader("Content-type", "application/json");
+                xhttp.send(JSON.stringify({
+                    "session": session,
+                    "password": password
+                }));
+            }
+            function logout() {
+                const xhttp = new XMLHttpRequest();
+                const url = baseUrl + '/logout';
+                xhttp.open("POST", url);
+                xhttp.onreadystatechange = function() {
+                    if (xhttp.readyState === 4) {
+                        if (xhttp.status === 200) {
+                            localStorage.removeItem('session');
+                            // Redirect to the new page on successful logout
+                            window.location.href = xhttp.responseURL;
+                        } else {
+                            // Handle unsuccessful logout
+                            alert('Logout failed');
+                        }
+                    }
+                };
+                xhttp.setRequestHeader("Content-type", "application/json");
+                xhttp.send(localStorage.getItem('session'));
+            }
+        </script>
+        <style>
+input {text-align:right;}
+        </style>
+    </head>
+    <body>
+        <h1>Logged In</h1>
+        <form onsubmit="pwreset(event)" method="post">
+            Reset Password:
+            <div class="container">
+                <input type="password" placeholder="Enter Password" name="psw" required>
+                <button type="submit">Password Reset</button>
+            </div>
+        </form>
+        <button type="button" onclick="logout()">Logout</button>
+    </body>
+</html>

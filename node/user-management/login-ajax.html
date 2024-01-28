@@ -1,0 +1,95 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+    <head>
+        <title>Till Sign In Page</title>
+        <meta name="Generator" content="me">
+        <meta name="Author" content="Till Hoffmann">
+        <meta name="Keywords" content="Login">
+        <meta name="Description" content="login page for the user-management-rest-server using ajax">
+        <meta charset="utf-8"/>
+        <script type="text/javascript">
+            const baseUrl='http://<ipv4address>:8080'
+            function register(event) {
+                const xhttp = new XMLHttpRequest();
+                const url = baseUrl + '/register';
+                event.preventDefault();
+                const username = document.getElementsByName('unameR')[0].value;
+                const password = document.getElementsByName('pswR')[0].value;
+                xhttp.open("POST", url);
+                xhttp.setRequestHeader("Content-type", "application/json");
+                xhttp.send(JSON.stringify({
+                    "userName": username,
+                    "password": password
+                }));
+            }
+            function credentialLogin(event) {
+                const xhttp = new XMLHttpRequest();
+                const url = baseUrl + '/login';
+                event.preventDefault();
+                const username = document.getElementsByName('unameL')[0].value;
+                const password = document.getElementsByName('pswL')[0].value;
+                const session = Math.floor(Math.random() * 100000) + 1; // not cryptographically secure but suffient for poc
+                xhttp.open("POST", url);
+                xhttp.setRequestHeader("Content-type", "application/json");
+                xhttp.onreadystatechange = function() {
+                    if (xhttp.readyState === 4) {
+                        if (xhttp.status === 200) {
+                            localStorage.setItem('session', JSON.stringify({"session": session}));
+                            // Redirect to the new page on successful login
+                            window.location.href = xhttp.responseURL;
+                        } else {
+                            // Handle unsuccessful login
+                            alert('Login failed');
+                        }
+                    }
+                };
+                xhttp.send(JSON.stringify({
+                    "userName": username,
+                    "password": password,
+                    "session": session
+                }));
+            }
+            function checkSession() {
+                const xhttp = new XMLHttpRequest();
+                const url = baseUrl + '/session';
+                xhttp.open("POST", url);
+                xhttp.setRequestHeader("Content-type", "application/json");
+                xhttp.onreadystatechange = function() {
+                    if (xhttp.readyState === 4) {
+                        if (xhttp.status === 200) {
+                            // Redirect to the new page on successful login
+                            window.location.href = xhttp.responseURL;
+                        } else {
+                            // Handle unsuccessful login
+                            alert('Login failed');
+                        }
+                    }
+                };
+                xhttp.send(localStorage.getItem('session'));
+            }
+        </script>
+        <style>
+input {text-align:right;}
+        </style>
+    </head>
+    <body>
+        <h1>Login</h1>
+        <form onsubmit="register(event)" method="post">
+            Register via Credentials:
+            <div class="container">
+                <input type="text" placeholder="Enter Username" name="unameR" required>
+                <input type="password" placeholder="Enter Password" name="pswR" required>
+                <button type="submit">Register</button>
+            </div>
+        </form>
+        <form onsubmit="credentialLogin(event)" method="post">
+            Login via Credentials:
+            <div class="container">
+                <input type="text" placeholder="Enter Username" name="unameL" required>
+                <input type="password" placeholder="Enter Password" name="pswL" required>
+                <button type="submit">Login</button>
+            </div>
+        </form>
+        <button type="button" onclick="checkSession()">check session</button>
+    </body>
+</html>

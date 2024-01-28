@@ -28,15 +28,20 @@ All group work and a summary of the web-technologies lecture at THI in the winte
 ├── minimal-web-proxy.py
 ├── minimal-web-server.py
 └── node
-    ├── App.js
-    ├── calc-rest-client.html
-    ├── calc-rest-server.js
+    ├── calc
+    │   ├── App.js
+    │   ├── calc-ajax-rest-client.html
+    │   └── calc-rest-server.mjs
     ├── hosts
     ├── minimal-web-proxy.js
     ├── minimal-web-server.js
-    ├── reset.json
-    ├── user-management-rest-server.mjs
-    └── user.json
+    └── user-management
+        ├── loggedIn-ajax.html
+        ├── login-ajax.html
+        ├── reset.json
+        ├── user-management-ajax-rest-server.js
+        ├── user-management-rest-server.js
+        └── user.json
 ```
 ## Summary
 
@@ -44,8 +49,8 @@ WIP
 
 ## Note
 - To add node to an OpenBSD system make sure you have root permissions and run `pkg_add node`
-- If node throws a package not found exception run `npm install <name>`
-- In `hosts` files, `./Virtual-Web-Servers/IPbased/httpd.conf`, `./node/App.js` and `./node/calc-rest-client.html` one needs to replace `<ipv4address>` accordingly
+- If node throws a package not found exception run `npm install <packagename>`
+- In `hosts` files, `./Virtual-Web-Servers/IPbased/httpd.conf`, `./node/calc/App.js` and all files with an `.html` file extension in the `./node` directory one needs to replace `<ipv4address>` accordingly
 
 ## Group Work 1
 ### Task
@@ -74,7 +79,7 @@ Implement a tiny proxy that fulfills the following requirements:
 
 ### Usage
 1. Start a shell and run `python minimal-web-proxy`
-2. Start a second shell and run `curl -x localhost:80 example.com`
+2. Start a second shell and run `curl -x localhost:8080 example.com`
 3. Repeat step 2 a vew times with diffrent web pages
 4. Go back in the first shell and stop the proxy via `ctrl + c`
 5. Take a look at the produced files `request.txt` and `response.txt`
@@ -208,13 +213,13 @@ Create 2 virtual webservers with httpd within an OpenBSD virtual machine using t
 Provide a REST-API for the calculator developed in **Group Work 4**
 
 ### Solution
-`./node`\
-`./node/calc-rest-server.js`, `./node/calc-rest-client.html`
+`./node/calc`\
+`./node/calc/calc-rest-server.js`, `./node/calc/calc-ajax-rest-client.html`
 
 ### Usage
 1. Deploy an OpenBSD virtual machine with one network-adapter in bridge mode
 2. Start a shell inside the vm and run `ifconfig`. The ipv4-address which can be found under em0 will be referred to as `<ipv4address>`
-3. Place `./node/calc-rest-server.js` inside a `directory` of your choice within the vm
+3. Place `./node/calc/calc-rest-server.js` inside a `directory` of your choice within the vm
 4. Start a shell inside the vm an run `node rest-api-server.js` inside the `directory` within the vm
 5. Start a shell on your host machine and run:
     1. `curl GET http://<ipv4address>:8080/add\?arg1\=1\&arg2\=2`
@@ -222,47 +227,78 @@ Provide a REST-API for the calculator developed in **Group Work 4**
     3. `curl GET http://<ipv4address>:8080/mul\?arg1\=5\&arg2\=3`
     4. `curl GET http://<ipv4address>:8080/div\?arg1\=10\&arg2\=0`
 
-**Note:**
-Instead of 5. one can open `./node/calc-rest-client.html`
+**Note:** One can test the REST-API using `./node/calc/calc-ajax-rest-client.html` within an Browser
+1. Place `./node/calc/calc-ajax-rest-client.html` inside the `directory` within the vm
+2. Open a browser and type `<ipv4address>:8080` into the addressbar
 
 ## Group Work 8
 ### Task
 Provide a REST-API that handles users with the following requirenments:
-- sign up
-- sign in (creating a session)
+- register account
+- login (creating a session)
 - password reset
 
 ### Solution
-`./node`\
-`./node/user-management-rest-server.mjs`, `./node/user.json`, `./node/reset.json`
+`./node/user-management`\
+`./node/user-management/user-management-rest-server.mjs`, `./node/user-management/user.json`, `./node/user-management/reset.json`
 
 ### Usage
 1. Deploy an OpenBSD virtual machine with one network-adapter in bridge mode
 2. Start a shell inside the vm and run `ifconfig`. The ipv4-address which can be found under em0 will be referred to as `<ipv4address>`
-3. Place `./node/user-management-rest-server.mjs` inside a `directory1` of your choice within the vm
+3. Place `./node/user-management/user-management-rest-server.mjs` inside a `directory1` of your choice within the vm
 4. Start a shell inside the vm an run `node user-management-rest-server.mjs` inside the `directory1` within the vm
 5. Place `./node/user.json` and `./node/reset.json` inside a `directory2` of your choice on your host machine
 6. Start a shell on your host machine and run the following curls inside the `directory2`:
     1. `curl http://<ipv4address>:8080/users`    (gives you all existing users)
     2. `curl -d @user.json -H "Content-Type: application/json" -X POST http://<ipv4address>:8080/users`     (creates the user specified in `user.json`)
     3. `curl -d @user.json -H "Content-Type: application/json" -X POST http://<ipv4address>:8080/login`     (creates a session for the user specified in `user.json`)
-    4. `curl -d @reset.json -H "Content-Type: application/json" -X POST http://10.30.80.121:8080/pwreset`    (sets a new password for the user with the specified `id`)
+    4. `curl -d @reset.json -H "Content-Type: application/json" -X POST http://<ipv4address>:8080/pwreset`    (sets a new password for the user with the specified `id`)
 
-**Note:**
-Run the first curl inbetween the others to see the effect of them.
+**Note:** Run the first curl inbetween the others to see the effect of them.
 
 ## Group Work 9
 ### Task
-Create a react frontend for the backend `./node/calc-rest-server.js` developed in **Group Work 7**
+Create a react frontend for the backend `./node/calc/calc-rest-server.mjs` developed in **Group Work 7**
 
 ### Solution
-`./node/App.js`
+`./node/calc/App.js`
 
 ### Usage
 1. Deploy an OpenBSD virtual machine with one network-adapter in bridge mode
 2. Start a shell inside the vm and run `ifconfig`. The ipv4-address which can be found under em0 will be referred to as `<ipv4address>`
-3. Place `./node/calc-rest-server.js` inside a `directory` of your choice within the vm
-4. Start a shell inside the vm an run `node calc-rest-server.js` inside the `directory` within the vm
+3. Place `./node/calc/calc-rest-server.mjs` inside a `directory` of your choice within the vm
+4. Start a shell inside the vm an run `node calc-rest-server.mjs` inside the `directory` within the vm
 5. Start a shell on your host machine and run  `npx create-react-app calc-rest-frontend` then `cd calculator-frontend`
 6. Replace the `./src/App.js` on your host machine with `./node/App.js` from this repo
 7. Run `npm start`
+
+## Group Work 10
+### Task
+Modify `./node/user-management-rest-server.mjs` developed in **Group Work 8** and develop an ajax frontend consisting of an login page and an content page.
+The following criterias need to be met
+- register account
+- login (creating a session)
+- logout (destroying a session)
+- password reset
+
+### Solution
+`./node/user-management`\
+`./node/user-management/user-management-ajax-rest-server.mjs`, `./node/user-management/login-ajax.html`, `./node/user-management/loggedIn-ajax.html`
+
+### Usage
+1. Deploy an OpenBSD virtual machine with one network-adapter in bridge mode
+2. Start a shell inside the vm and run `ifconfig`. The ipv4-address which can be found under em0 will be referred to as `<ipv4address>`
+3. Place `./node/user-management/user-management-ajax-rest-server.mjs`, `./node/user-management/login-ajax.html`, `./node/user-management/loggedIn-ajax.html` inside a `directory` of your choice within the vm
+4. Start a shell inside the vm and run `node user-management-ajax-rest-server.mjs` inside the `directory` within the vm
+5. Open a browser on your host machine and type `http://<ipv4address>:8080/` into the addressbar
+
+**Note:** 
+- Start a shell on your host machine and run `curl http://<ipv4address>:8080/users` to print the current database entries
+- Registering the same username multiple times can lead to problems 
+- This Proof-of-Concept has two major security concerns
+    - Session are handeled in the html client not by the browser in form of cookies
+    - One can access the content page by calling the API endpoint directly
+
+## Group Work 11
+### Task
+PHP
