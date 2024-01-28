@@ -79,7 +79,7 @@ Implement a tiny proxy that fulfills the following requirements:
 
 ### Usage
 1. Start a shell and run `python minimal-web-proxy`
-2. Start a second shell and run `curl -x localhost:80 example.com`
+2. Start a second shell and run `curl -x localhost:8080 example.com`
 3. Repeat step 2 a vew times with diffrent web pages
 4. Go back in the first shell and stop the proxy via `ctrl + c`
 5. Take a look at the produced files `request.txt` and `response.txt`
